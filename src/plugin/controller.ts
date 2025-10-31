@@ -1,7 +1,7 @@
 // Show the plugin UI
 figma.showUI(__html__, { 
-  width: 440, 
-  height: 520,
+  width: 316, 
+  height: 640,
   title: 'Prompt Builder'
 });
 
@@ -14,7 +14,7 @@ figma.ui.onmessage = (msg) => {
   if (msg.type === 'resize-ui') {
     const { width, height } = msg;
     if (typeof width === 'number' && typeof height === 'number') {
-      figma.ui.resize(Math.max(360, width), Math.max(300, height));
+      figma.ui.resize(Math.max(316, width), Math.max(300, height));
     }
   }
   

@@ -17,37 +17,165 @@ body {
   flex-direction: column;
 }
 
+/* Home */
+.home {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #efe9ff 100%);
+  animation: fadeIn 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.home-header { text-align: center; margin-bottom: 24px; margin-top: 50px; animation: fadeInUp 420ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.home-title { font-size: 28px; font-weight: 800; margin: 0; color: #0f172a; }
+.home-subtitle { font-size: 16px; color: #374151; margin: 6px 0 0 0; }
+
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  max-width: 320px; /* ajusta a ancho del plugin */
+  margin: 0 auto;
+  justify-items: stretch;
+}
+
+.home-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 10px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
+              background-color 220ms ease,
+              border-color 220ms ease;
+  will-change: transform, box-shadow;
+}
+
+.home-card:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 10px 22px rgba(0,0,0,0.14); border-color: #d1d5db; background: #f8fafc; }
+.home-card:active { transform: translateY(0.5px) scale(0.99); }
+
+.home-card-thumb {
+  width: 84px;
+  height: 84px;
+  border-radius: 8px;
+  background: #eef2ff; /* leve tono para destacar el icono */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b46c1; /* color del icono via currentColor */
+}
+
+.home-card-title { font-weight: 700; color: #111827; text-align: center; }
+
+.placeholder { padding: 16px; }
+
+/* mantén dos columnas incluso en compacto */
+
+/* Nav select in header */
+.nav-controls { display: flex; align-items: center; gap: 8px; }
+.nav-select {
+  padding: 6px 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.nav-back-btn {
+  padding: 6px 8px;
+}
+
+.nav-back-btn:hover {
+  background: #f9fafb;
+  border-color: #e5e7eb;
+  color: #374151;
+  transform: none;
+  box-shadow: none;
+}
+
+.nav-back-btn:active {
+  background: #eef2ff;
+}
+
 /* Icon Prompt Generator */
 .icon-prompt {
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  background: #ffffff;
+  background: #f8fafc;
   width: 100%;
 }
 
 .icon-header {
-  padding: 16px;
+  padding: 20px 16px;
+  padding-bottom: 24px; /* un poco más de espacio bajo el título */
+  background: linear-gradient(90deg, #e9d5ff 0%, #f4eaff 50%, #ffffff 100%);
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .icon-title {
   font-size: 22px;
   font-weight: 700;
-  color: #0f172a;
+  color: #6b46c1; /* morado del sistema */
   margin: 0;
 }
 
 .icon-content {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 0 16px 16px 16px;
+  gap: 20px;
+  padding: 0 18px 18px 18px;
+}
+
+/* Más espacio por encima del primer título de sección */
+.icon-content .form-section:first-child .label {
+  margin-top: 8px;
+}
+
+/* Yapito Prompt: replicar la misma estructura visual que Icon Prompt */
+.yapito-prompt {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background: #f8fafc;
+  width: 100%;
+}
+
+.yapito-header {
+  padding: 20px 16px;
+  padding-bottom: 24px;
+  background: linear-gradient(90deg, #e9d5ff 0%, #f4eaff 50%, #ffffff 100%);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.yapito-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #6b46c1;
+  margin: 0;
+}
+
+.yapito-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 18px 18px 18px;
+}
+
+.yapito-content .form-section:first-child .label {
+  margin-top: 8px;
 }
 
 .form-section {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .label {
@@ -73,14 +201,14 @@ body {
 .divider {
   border: none;
   border-top: 1px solid #e5e7eb;
-  margin: 12px 0;
+  margin: 16px 0;
 }
 
 .actions {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .btn {
@@ -94,12 +222,78 @@ body {
   cursor: pointer;
   background: #ffffff;
   flex: 0 0 auto;
+  transition: background-color 180ms ease, border-color 180ms ease,
+              transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
+
+.btn:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+  color: #111827;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* Hover más sutil dentro del generador (evita movimiento/sombra fuerte) */
+.icon-prompt .btn:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Fade-in elegante al iniciar */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.home-grid .home-card { animation: fadeInUp 500ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.home-grid .home-card:nth-child(1) { animation-delay: 80ms; }
+.home-grid .home-card:nth-child(2) { animation-delay: 160ms; }
+.home-grid .home-card:nth-child(3) { animation-delay: 240ms; }
 
 .btn-icon { font-size: 16px; }
 
 .btn-reset {
   color: #374151;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-reset:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  color: #111827;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-reset .btn-icon { transition: transform 0.2s ease; }
+.btn-reset:hover .btn-icon { transform: rotate(-15deg); }
+
+@keyframes reset-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.btn-reset.animate .btn-icon {
+  animation: reset-spin 400ms ease;
+}
+
+/* Color feedback on click */
+.btn-reset.animate {
+  background: #6b46c1; /* strong violet */
+  border-color: #5a35b6;
+  color: #ffffff; /* white text/icon via currentColor */
+  box-shadow: 0 4px 10px rgba(107, 70, 193, 0.35);
+}
+
+.btn-reset:active {
+  transform: translateY(0.5px);
 }
 
 .btn-copy {
@@ -113,14 +307,35 @@ body {
 .viewer-section {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 8px;
+  gap: 12px;
+  margin-top: 12px;
 }
 
-.viewer-header {
+.viewers-group {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.viewer-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.viewer-subtitle {
+  font-size: 15px;
+  color: #374151;
+}
+
+.viewer-subtitle-row {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.viewer-container {
+  position: relative;
 }
 
 .copy-btn {
@@ -140,15 +355,64 @@ body {
 
 .viewer {
   width: 100%;
-  min-height: 100px;
+  min-height: 160px; /* más alto por defecto */
+  height: 180px; /* altura inicial, ajustable */
   padding: 12px;
   border: 1px solid #d1d5db;
   border-radius: 8px;
   font-size: 14px;
   line-height: 1.5;
-  resize: vertical;
+  resize: vertical; /* permite ajustar el alto */
   outline: none;
   background-color: #f9fafb;
+}
+
+.copy-inset-btn {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #374151;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+}
+
+.copy-inset-btn:hover {
+  background: #6b46c1;
+  border-color: #5a35b6;
+  color: #ffffff; /* CopyIcon uses currentColor */
+  box-shadow: 0 2px 8px rgba(107, 70, 193, 0.25);
+  transform: translateY(-0.5px);
+}
+
+.copy-inset-btn:active { transform: translateY(0.5px) scale(0.98); }
+.copy-inset-btn:focus-visible { outline: 2px solid rgba(107, 70, 193, 0.35); outline-offset: 2px; }
+
+.copy-toast {
+  position: absolute;
+  top: 42px;
+  right: 8px;
+  background: #111827;
+  color: #ffffff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.copy-toast.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .resize-controls {
@@ -351,13 +615,13 @@ body {
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
   outline: none;
 }
 
-.copy-button:hover {
-  background: #334155;
-}
+.copy-button:hover { background: #334155; box-shadow: 0 2px 8px rgba(51, 65, 85, 0.35); transform: translateY(-0.5px); }
+.copy-button:active { transform: translateY(0.5px) scale(0.98); }
+.copy-button:focus-visible { box-shadow: 0 0 0 3px rgba(30, 41, 59, 0.5); }
 
 .copy-button:focus {
   box-shadow: 0 0 0 3px rgba(30, 41, 59, 0.3);
@@ -413,4 +677,39 @@ body {
 .json-preview-section::-webkit-scrollbar-thumb:hover,
 .json-preview-content::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+.info-tip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: #6b7280;
+  cursor: default;
+}
+
+.info-tip:hover { color: #374151; }
+
+.info-icon { font-size: 16px; }
+
+.info-tooltip {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  margin-bottom: 6px;
+  background: #111827;
+  color: #ffffff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+}
+
+.info-tip:hover .info-tooltip {
+  opacity: 1;
+  transform: translateY(0);
 }
