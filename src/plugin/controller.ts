@@ -1,26 +1,28 @@
-figma.showUI(__html__);
+// Show the plugin UI
+figma.showUI(__html__, { 
+  width: 440, 
+  height: 520,
+  title: 'Prompt Builder'
+});
 
+// Handle messages from the UI
 figma.ui.onmessage = (msg) => {
-  if (msg.type === 'create-rectangles') {
-    const nodes = [];
-
-    for (let i = 0; i < msg.count; i++) {
-      const rect = figma.createRectangle();
-      rect.x = i * 150;
-      rect.fills = [{ type: 'SOLID', color: { r: 1, g: 0.5, b: 0 } }];
-      figma.currentPage.appendChild(rect);
-      nodes.push(rect);
-    }
-
-    figma.currentPage.selection = nodes;
-    figma.viewport.scrollAndZoomIntoView(nodes);
-
-    // This is how figma responds back to the ui
-    figma.ui.postMessage({
-      type: 'create-rectangles',
-      message: `Created ${msg.count} Rectangles`,
-    });
+  if (msg.type === 'close-plugin') {
+    figma.closePlugin();
   }
-
-  figma.closePlugin();
+  
+  if (msg.type === 'resize-ui') {
+    const { width, height } = msg;
+    if (typeof width === 'number' && typeof height === 'number') {
+      figma.ui.resize(Math.max(360, width), Math.max(300, height));
+    }
+  }
+  
+  // Add any other message handlers here if needed
+  // For now, this plugin is primarily UI-based for generating JSON prompts
 };
+
+// Optional: Close plugin when user presses Escape
+figma.on('close', () => {
+  // Cleanup if needed
+});

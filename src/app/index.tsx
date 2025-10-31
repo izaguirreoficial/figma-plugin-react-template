@@ -2,8 +2,16 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './components/App';
 
-document.addEventListener('DOMContentLoaded', function () {
+const init = () => {
   const container = document.getElementById('react-page');
-  const root = createRoot(container);
+  if (!container) return;
+  const root = createRoot(container as HTMLElement);
   root.render(<App />);
-});
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  // In environments like Figma, scripts may be executed after DOM is already ready
+  init();
+}

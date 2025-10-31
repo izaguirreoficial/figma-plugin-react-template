@@ -1,37 +1,416 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font: 12px sans-serif;
-  text-align: center;
-  margin: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  color: #333;
 }
-button {
-  border-radius: 5px;
+
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Icon Prompt Generator */
+.icon-prompt {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background: #ffffff;
+  width: 100%;
+}
+
+.icon-header {
+  padding: 16px;
+}
+
+.icon-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.icon-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 16px 16px 16px;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #6b46c1;
+  box-shadow: 0 0 0 3px rgba(107, 70, 193, 0.1);
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 12px 0;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  background: #ffffff;
+  flex: 0 0 auto;
+}
+
+.btn-icon { font-size: 16px; }
+
+.btn-reset {
+  color: #374151;
+}
+
+.btn-copy {
+  background: #6b46c1;
+  color: #ffffff;
+  border-color: #6b46c1;
+}
+
+.btn-copy:hover { background: #5a35b6; }
+
+.viewer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.viewer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #6b7280;
+}
+
+.copy-btn:hover {
+  color: #4b5563;
+}
+
+.viewer {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: vertical;
+  outline: none;
+  background-color: #f9fafb;
+}
+
+.resize-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.size-select {
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: 14px;
+}
+
+@media (max-width: 520px) {
+  .icon-title { font-size: 20px; }
+  .icon-header { padding: 12px; }
+  .icon-content { padding: 0 12px 12px; gap: 12px; }
+  .btn { font-size: 14px; }
+  .input, .viewer { font-size: 15px; }
+}
+
+/* JSON Prompter Main Layout */
+.json-prompter {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
   background: white;
-  color: black;
-  border: none;
-  padding: 8px 15px;
-  margin: 0 5px;
-  box-shadow: inset 0 0 0 1px black;
-  outline: none;
 }
-#create {
-  box-shadow: none;
-  background: #18a0fb;
+
+.json-prompter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e1e5e9;
+  background: white;
+  min-height: 60px;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon {
+  font-size: 20px;
+}
+
+.logo-text {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  color: #6b46c1;
+}
+
+.template-selector {
+  min-width: 200px;
+}
+
+.template-dropdown {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: white;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+}
+
+.template-dropdown:focus {
+  border-color: #6b46c1;
+  box-shadow: 0 0 0 3px rgba(107, 70, 193, 0.1);
+}
+
+/* Content Layout */
+.json-prompter-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.field-builder-section {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  border-right: 1px solid #e1e5e9;
+  background: #f8f9fa;
+}
+
+.json-preview-section {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background: white;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  color: #374151;
+}
+
+/* Field Builder Styles */
+.field-builder {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+.field-input,
+.field-textarea,
+.field-select {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: white;
+}
+
+.field-input:focus,
+.field-textarea:focus,
+.field-select:focus {
+  border-color: #6b46c1;
+  box-shadow: 0 0 0 3px rgba(107, 70, 193, 0.1);
+}
+
+.field-textarea {
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}
+
+.field-select {
+  cursor: pointer;
+}
+
+/* JSON Preview Styles */
+.json-preview {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.json-preview-content {
+  flex: 1;
+  background: #1e293b;
+  border-radius: 8px;
+  overflow: auto;
+  margin-bottom: 16px;
+}
+
+.json-code {
+  padding: 16px;
+  margin: 0;
+  color: #e2e8f0;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.json-preview-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.copy-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: #1e293b;
   color: white;
-}
-input {
   border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
   outline: none;
-  padding: 8px;
 }
-input:hover {
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+
+.copy-button:hover {
+  background: #334155;
 }
-button:focus {
-  box-shadow: inset 0 0 0 2px #18a0fb;
+
+.copy-button:focus {
+  box-shadow: 0 0 0 3px rgba(30, 41, 59, 0.3);
 }
-#create:focus {
-  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.3);
+
+.copy-icon {
+  font-size: 16px;
 }
-input:focus {
-  box-shadow: inset 0 0 0 2px #18a0fb;
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .json-prompter-content {
+    flex-direction: column;
+  }
+  
+  .field-builder-section {
+    border-right: none;
+    border-bottom: 1px solid #e1e5e9;
+  }
+  
+  .json-prompter-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  
+  .template-selector {
+    min-width: auto;
+  }
+}
+
+/* Scrollbar Styling */
+.field-builder-section::-webkit-scrollbar,
+.json-preview-section::-webkit-scrollbar,
+.json-preview-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.field-builder-section::-webkit-scrollbar-track,
+.json-preview-section::-webkit-scrollbar-track,
+.json-preview-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.field-builder-section::-webkit-scrollbar-thumb,
+.json-preview-section::-webkit-scrollbar-thumb,
+.json-preview-content::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.field-builder-section::-webkit-scrollbar-thumb:hover,
+.json-preview-section::-webkit-scrollbar-thumb:hover,
+.json-preview-content::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
