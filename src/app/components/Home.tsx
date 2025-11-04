@@ -19,6 +19,53 @@ const Home: React.FC<HomeProps> = ({ onSelect }) => {
             <div className="home-card-thumb"><StarIcon size={24} /></div>
             <div className="home-card-title">Generador de Iconos</div>
           </button>
+        <div className="home-grid one-column">
+          <button className="home-card" onClick={() => onSelect('iconGen')}>
+            <div className="home-card-thumb"><StarIcon size={24} /></div>
+            <div className="home-card-title">Generador de Iconos</div>
+          </button>
+          <button className="home-card" onClick={() => onSelect('images')}>
+            <div className="home-card-thumb"><ImageIcon size={24} /></div>
+            <div className="home-card-title">Generar Ilustraciones</div>
+          </button>
+          <button className="home-card" onClick={() => onSelect('yapito')}>
+            <div className="home-card-thumb"><PersonIcon size={24} /></div>
+            <div className="home-card-title">Generar Yapito</div>
+          </button>
+        </div>
+-        <div className="home-grid one-column">
+-          <button className="home-card" onClick={() => onSelect('iconGen')}>
+-            <div className="home-card-thumb"><StarIcon size={24} /></div>
+-            <div className="home-card-title">Generador de Iconos</div>
+-          </button>
+-        <div className="home-grid one-column">
+-          <button className="home-card" onClick={() => onSelect('iconGen')}>
+-            <div className="home-card-thumb"><StarIcon size={24} /></div>
+-            <div className="home-card-title">Generador de Iconos</div>
+-          </button>
+-          <button className="home-card" onClick={() => onSelect('images')}>
+-            <div className="home-card-thumb"><ImageIcon size={24} /></div>
+-            <div className="home-card-title">Generar Ilustraciones</div>
+-          </button>
+-          <button className="home-card" onClick={() => onSelect('yapito')}>
+-            <div className="home-card-thumb"><PersonIcon size={24} /></div>
+-            <div className="home-card-title">Generar Yapito</div>
+-          </button>
+-        </div>
+-+        <div className="home-grid one-column">
+-+          <button className="home-card" onClick={() => onSelect('iconGen')}>
+-+            <div className="home-card-thumb"><StarIcon size={24} /></div>
+-+            <div className="home-card-title">Generador de Iconos</div>
+-+          </button>
+-+          <button className="home-card" onClick={() => onSelect('images')}>
+-+            <div className="home-card-thumb"><ImageIcon size={24} /></div>
+-+            <div className="home-card-title">Generar Ilustraciones</div>
+-+          </button>
+-+          <button className="home-card" onClick={() => onSelect('yapito')}>
+-+            <div className="home-card-thumb"><PersonIcon size={24} /></div>
+-+            <div className="home-card-title">Generar Yapito</div>
+-+          </button>
+-+        </div>
 +        <div className="home-grid one-column">
 +          <button className="home-card" onClick={() => onSelect('iconGen')}>
 +            <div className="home-card-thumb"><StarIcon size={24} /></div>
@@ -32,7 +79,7 @@ const Home: React.FC<HomeProps> = ({ onSelect }) => {
 +            <div className="home-card-thumb"><PersonIcon size={24} /></div>
 +            <div className="home-card-title">Generar Yapito</div>
 +          </button>
-        </div>
++        </div>
       </section>
 
       {/* Sección Prompt Builder */}
