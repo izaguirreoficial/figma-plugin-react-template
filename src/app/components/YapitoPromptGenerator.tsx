@@ -6,7 +6,7 @@ interface YapitoPromptGeneratorProps {
 }
 
 const BASE_YAPITO_TEXT =
-  "Generate an illustration of the 'Yapito' mascot. Subject: An anthropomorphic red-pink smartphone. Body: Rectangular smartphone shape with rounded edges, slight 3D perspective. Screen: purple color. Logo: The text 'yape' in white script, with an 'S/' icon in a turquoise speech bubble, all within the purple screen and below the face. Limbs: Simple, flexible red-pink arms and legs. Style: 2D vector illustration, flat colors, minimalist, friendly corporate mascot.";
+  "2D vector illustration of 'Yapito' mascot: a red-pink anthropomorphic smartphone, rectangular body, rounded edges. Purple screen with red-pink face. Logo: 'yape' (white script) & 'S/' (turquoise bubble) inside screen, below face. Simple red-pink limbs. Flat colors, minimalist style.";
 
 const YapitoPromptGenerator: React.FC<YapitoPromptGeneratorProps> = ({ onNavigate }) => {
   const [expresion, setExpresion] = useState('');
@@ -16,9 +16,14 @@ const YapitoPromptGenerator: React.FC<YapitoPromptGeneratorProps> = ({ onNavigat
   const [resetAnimating, setResetAnimating] = useState(false);
 
   const yapitoPrompt = useMemo(() => {
-    const facePart = expresion.trim() ? ` FACE: ${expresion.trim()} red-pink color.` : '';
-    const actionPart = accion.trim() ? ` CHARACTER ACTION: ${accion.trim()}.` : '';
-    const backgroundPart = fondo.trim() ? ` BACKGROUND: ${fondo.trim()}.` : '';
+    const faceValue = expresion.trim() ? expresion.trim() : '[ej: Feliz]';
+    const actionValue = accion.trim() ? accion.trim() : '[ej: sujetando un celular]';
+    const backgroundValue = fondo.trim() ? fondo.trim() : '[ej: en el parque]';
+
+    const facePart = ` FACE EXPRESSION: ${faceValue}.`;
+    const actionPart = ` CHARACTER ACTION: ${actionValue}.`;
+    const backgroundPart = ` BACKGROUND: ${backgroundValue}.`;
+
     return `${BASE_YAPITO_TEXT}${facePart}${actionPart}${backgroundPart}`;
   }, [expresion, accion, fondo]);
 

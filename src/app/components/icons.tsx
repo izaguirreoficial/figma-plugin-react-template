@@ -8,10 +8,9 @@ export const CopyIcon: React.FC<{ size?: number; className?: string }> = ({ size
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     className={className}
-    aria-hidden="true"
   >
-    <rect x="9" y="9" width="11" height="11" rx="2" stroke="currentColor" strokeWidth="2" />
-    <rect x="4" y="4" width="11" height="11" rx="2" stroke="currentColor" strokeWidth="2" />
+    <rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" strokeWidth="2" />
+    <path d="M5 15V3a2 2 0 012-2h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 

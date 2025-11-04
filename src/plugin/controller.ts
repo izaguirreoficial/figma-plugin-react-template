@@ -18,6 +18,23 @@ figma.ui.onmessage = (msg) => {
     }
   }
   
+  if (msg.type === 'insert-svg') {
+-    const { svg } = msg;
+-    const node = figma.createNodeFromSvg(svg);
+-    const { svg, size } = msg;
+-    const node = figma.createNodeFromSvg(svg);
+-    if (size && typeof size === 'number') {
+-      const scale = size / node.width;
+-      node.resizeWithoutConstraints(size, size);
+-    }
++    const { svg, size } = msg;
++    const node = figma.createNodeFromSvg(svg);
++    if (size && typeof size === 'number') {
++      node.resizeWithoutConstraints(size, size);
++    }
+     figma.currentPage.appendChild(node);
+     figma.viewport.scrollAndZoomIntoView([node]);
+   }
   // Add any other message handlers here if needed
   // For now, this plugin is primarily UI-based for generating JSON prompts
 };

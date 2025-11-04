@@ -8,7 +8,8 @@ const SOLID_ICON_TEMPLATE_PREFIX = 'Icon of ';
 const SOLID_ICON_TEMPLATE_SUFFIX = ', solid icon style, base shape with solid dark fill #000000, \'knockout\' details in white negative space #FFFFFF, all corners and endings smoothly rounded, isolated on pure white background #FFFFFF, vector design for UI/UX, robust geometry, 1:1 aspect ratio, optimized for 24 px.';
 
 interface IconPromptGeneratorProps {
-  onNavigate?: (view: 'home' | 'images' | 'yapito' | 'icons') => void;
+-  onNavigate?: (view: 'home' | 'images' | 'yapito' | 'icons') => void;
++  onNavigate?: (view: 'home' | 'images' | 'yapito' | 'icons' | 'iconGen') => void;
 }
 
 const IconPromptGenerator: React.FC<IconPromptGeneratorProps> = ({ onNavigate }) => {
