@@ -27,7 +27,7 @@ body {
   animation: fadeIn 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.home-header { text-align: center; margin-bottom: 24px; margin-top: 50px; animation: fadeInUp 420ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.home-header { text-align: left; margin-bottom: 24px; margin-top: 20px; animation: fadeInUp 420ms cubic-bezier(0.22, 1, 0.36, 1) both; }
 .home-title { font-size: 28px; font-weight: 800; margin: 0; color: #0f172a; }
 .home-subtitle { font-size: 16px; color: #374151; margin: 6px 0 0 0; }
 
@@ -35,17 +35,23 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
-  max-width: 320px; /* ajusta a ancho del plugin */
+  max-width: 320px; /* ancho original a dos columnas */
   margin: 0 auto;
   justify-items: stretch;
 }
 
+/* Variante de una sola columna para ocupar todo el ancho */
+.home-grid.one-column {
+  grid-template-columns: 1fr;
+  max-width: 400px;
+}
+
 .home-card {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 12px;
-  padding: 12px 10px;
+  gap: 14px;
+  padding: 14px 16px;
   border-radius: 10px;
   border: 1px solid #e5e7eb;
   background: #ffffff;
@@ -62,8 +68,8 @@ body {
 .home-card:active { transform: translateY(0.5px) scale(0.99); }
 
 .home-card-thumb {
-  width: 84px;
-  height: 84px;
+  width: 32px;
+  height: 32px;
   border-radius: 8px;
   background: #eef2ff; /* leve tono para destacar el icono */
   display: flex;
@@ -72,7 +78,7 @@ body {
   color: #6b46c1; /* color del icono via currentColor */
 }
 
-.home-card-title { font-weight: 700; color: #111827; text-align: center; }
+.home-card-title { font-weight: 700; color: #111827; text-align: left; }
 
 .placeholder { padding: 16px; }
 
@@ -542,6 +548,10 @@ body {
   margin-bottom: 4px;
 }
 
+/* Home Sections */
+.home-section {
+  margin-bottom: 56px; /* extra space between Generador y Prompt Builder */
+}
 .field-input,
 .field-textarea,
 .field-select {
@@ -712,4 +722,27 @@ body {
 .info-tip:hover .info-tooltip {
   opacity: 1;
   transform: translateY(0);
+}
+
+.generated-icons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.icon-preview {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.icon-preview .btn {
+  font-size: 12px;
+  padding: 6px 8px;
 }

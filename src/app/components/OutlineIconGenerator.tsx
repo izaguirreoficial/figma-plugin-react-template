@@ -12,12 +12,19 @@ const OutlineIconGenerator: React.FC<OutlineIconGeneratorProps> = ({ onNavigate 
   const [prompt, setPrompt] = useState('');
   const [icons, setIcons] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
++  const [loading, setLoading] = useState(false);
++  const [genAnimating, setGenAnimating] = useState(false);
 
   const generateIcons = async () => {
-    if (!prompt.trim()) return;
-    setLoading(true);
++  const generateIcons = async () => {
+     if (!prompt.trim()) return;
+     setLoading(true);
++    setGenAnimating(true);
++    setTimeout(() => setGenAnimating(false), 420);
     try {
-      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
+      ---typescript
+      // Gemini API ahora recomienda pasar la API-Key en cabecera y no como parámetro de query.
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent`;
       const instruction = `You are an expert icon designer. Generate TWO different SVG icons (24x24 viewBox, black #000 strokes, 2px stroke width, no fill) that represent the following description: "${prompt.trim()}". Return ONLY the SVG code of the two icons, separated by the token \"|||\" with no additional explanation.`;
 
       const body = {
@@ -31,10 +38,17 @@ const OutlineIconGenerator: React.FC<OutlineIconGeneratorProps> = ({ onNavigate 
 
       const response = await fetch(endpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-goog-api-key': API_KEY,
+        },
         body: JSON.stringify(body),
       });
-      if (!response.ok) throw new Error(`API error ${response.status}`);
+-      if (!response.ok) throw new Error(`API error ${response.status}`);
++      if (!response.ok) {
++        const errText = await response.text();
++        throw new Error(`API error ${response.status}: ${errText}`);
++      }
 
       const data = await response.json();
       const text: string = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
@@ -46,8 +60,9 @@ const OutlineIconGenerator: React.FC<OutlineIconGeneratorProps> = ({ onNavigate 
 
       setIcons(snippets.slice(0, 2));
     } catch (err) {
-      console.error(err);
-      alert('Error generando iconos, revisa la consola');
+      console.error('Error while calling Gemini API', err);
+      const message = err instanceof Error ? err.message : 'Error desconocido';
+      alert(`Error generando iconos: ${message}`);
     } finally {
       setLoading(false);
     }
@@ -63,8 +78,8 @@ const OutlineIconGenerator: React.FC<OutlineIconGeneratorProps> = ({ onNavigate 
 
   return (
     <div className="icon-generator-page">
-      <header className="icon-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <h1 className="icon-title">✨ Generador de iconos con IA</h1>
+      <header className="icon-header">
+        <h1 className="icon-title">Generador de Iconos</h1>
         <button
           className="btn nav-back-btn"
           aria-label="Volver a Home"
@@ -89,9 +104,18 @@ const OutlineIconGenerator: React.FC<OutlineIconGeneratorProps> = ({ onNavigate 
 
         <div className="actions" style={{ marginTop: 8 }}>
           <button className="btn" disabled={loading} onClick={generateIcons}>
-            {loading ? 'Generando…' : '✨ Generar iconos'}
+            {loading ? 'Generando…' : 'Generar Iconos'}
           </button>
         </div>
++        <div className="actions" style={{ marginTop: 8 }}>
++          <button
++            className={`btn btn-reset ${genAnimating ? 'animate' : ''}`}
++            disabled={loading}
++            onClick={generateIcons}
++          >
++            {loading ? 'Generando…' : 'Generar'}
++          </button>
++        </div>
 
         {icons.length > 0 && (
           <div className="generated-icons" style={{ display: 'flex', gap: 16 }}>
