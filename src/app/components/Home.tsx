@@ -103,6 +103,33 @@ const Home: React.FC<HomeProps> = ({ onSelect }) => {
           </button>
         </div>
       </section>
+
+      {/* Sección Generador de Prompt (deshabilitado) */}
+      <section className="home-section">
+        <header className="home-header">
+          <h2 className="home-title">Generador de Prompt</h2>
+          <p className="home-subtitle">En desarrollo – disponible próximamente</p>
+        </header>
+        <div className="home-grid one-column">
+          <button className="home-card disabled" disabled>
+            <div className="home-card-thumb"><StarIcon size={24} /></div>
+            <div className="home-card-title">Generador de Iconos</div>
+          </button>
+        </div>
+      </section>
++      {/* Sección Generador */}
++      <section className="home-section">
++        <header className="home-header">
++          <h2 className="home-title">Generador</h2>
++          <p className="home-subtitle">Elige qué quieres crear hoy</p>
++        </header>
++        <div className="home-grid one-column">
++          <button className="home-card" onClick={() => onSelect('iconGen')}>
++            <div className="home-card-thumb"><StarIcon size={24} /></div>
++            <div className="home-card-title">Generador de Iconos</div>
++          </button>
++        </div>
++      </section>
     </div>
   );
 };
